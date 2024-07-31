@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+        }
+        button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SEO Analyzer</h1>
+        <form id="analyzeForm">
+            <input type="text" id="url" placeholder="Enter URL" required>
+            <button type="submit">Analyze</button>
+        </form>
+        <div class="result" id="result">
+            <!-- Results will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('analyzeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = document.getElementById('url').value;
+            
+            const analyzeButton = e.target.querySelector('button');
+            const resultDiv = document.getElementById('result');
+
+            // Disable the button and show loading state
+            analyzeButton.disabled = true;
+            analyzeButton.classList.add('loading');
+            analyzeButton.textContent = 'Analyzing...';
+
+            try {
+                const response = await fetch('/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ url })
+                });
+
+                const data = await response.json();
+                const resultDiv = document.getElementById('result');
+
+                resultDiv.innerHTML = `
+                    <h2>Analysis Result</h2>
+                    <p><strong>Title:</strong> ${data.title}</p>
+                    <p><strong>Description:</strong> ${data.description}</p>
+                    <p><strong>Headings:</strong> ${data.headings.join(', ')}</p>
+                    <p><strong>Word Count:</strong> ${data.wordCount}</p>
+                    <p><strong>Conceptual Page Rank Score</strong> ${data.bm25Score}</p>
+                    <p><strong>Analysis:</strong> ${data.analysis}</p>
+                `;
+            } catch (error) {
+                console.error('Error analyzing the page:', error);
+            }finally {
+               
+                analyzeButton.disabled = false;
+                analyzeButton.classList.remove('loading');
+                analyzeButton.textContent = 'Analyze';
+            }
+        });
+    </script>
+</body>
+</html>
