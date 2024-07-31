@@ -72,3 +72,9 @@ To set up and run the project locally, follow these steps:
 - `.env`: Environment file to store the OpenAI API key.
 - `package.json`: Contains the project metadata and dependencies.
 
+## Contributing
+Contributions are welcome! If you have any suggestions or find any bugs, please open an issue or create a pull request.
+
+## License
+This project is licensed under the MIT License.
+
