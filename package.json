@@ -1,0 +1,19 @@
+{
+    "name": "web-scraper-seo-analyzer",
+    "version": "1.0.0",
+    "description": "A web scraper and SEO analyzer using Axios, Cheerio, OpenAI, and Express.",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+      "axios": "^0.21.1",
+      "cheerio": "^1.0.0-rc.10",
+      "express": "^4.17.1",
+      "openai": "^3.0.0"
+    }
+  }
+  
