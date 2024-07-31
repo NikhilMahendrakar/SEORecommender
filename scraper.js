@@ -18,31 +18,41 @@ async function scrapePage(url) {
         // Extract headings
         const headings = [];
         $('h1, h2, h3, h4, h5, h6').each((i, elem) => {
+            if(headings.length <= 25){
             headings.push($(elem).text());
+            }
         });
 
         // Extract images
         const images = [];
         $('img').each((i, elem) => {
-            images.push($(elem).attr('src'));
+            if(images.length <= 25){
+             images.push($(elem).attr('src'));
+            }
         });
 
         // Extract links
         const links = [];
         $('a').each((i, elem) => {
+            if(links.length <= 25){
             links.push($(elem).attr('href'));
+            }
         });
 
         // Extract paragraphs
         const paragraphs = [];
         $('p').each((i, elem) => {
+            if(paragraphs.length <= 25){
             paragraphs.push($(elem).text());
+            }
         });
 
         // Extract scripts
         const scripts = [];
         $('script[src]').each((i, elem) => {
+            if(scripts.length <= 25){
             scripts.push($(elem).attr('src'));
+            }
         });
 
         // Extract body text
